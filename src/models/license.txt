@@ -1,0 +1,11 @@
+Model Information:
+* title:	PocketMeal
+* source:	https://sketchfab.com/3d-models/pocketmeal-90d8ad0314b94ca2a439c34c7273cb3d
+* author:	jojorjin10 (https://sketchfab.com/jojorjin10)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PocketMeal" (https://sketchfab.com/3d-models/pocketmeal-90d8ad0314b94ca2a439c34c7273cb3d) by jojorjin10 (https://sketchfab.com/jojorjin10) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
