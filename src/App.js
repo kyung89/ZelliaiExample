@@ -1,9 +1,9 @@
-import JellyAnimation2 from "./components/JellyAnimation2";
+import JellyAnimation3 from "./components/JellyAnimation3";
 
 export default function App() {
   return (
     <div>
-      <JellyAnimation2 />
+      <JellyAnimation3 />
     </div>
   );
 }
