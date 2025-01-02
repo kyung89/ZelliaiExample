@@ -7,8 +7,15 @@ function JellyAnimation2() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
+    // 캔버스 크기 설정
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    // 제한된 공간 설정
+    const areaWidth = Math.min(canvas.width, 800); // 최대 800px로 제한
+    const areaHeight = Math.min(canvas.height, 600); // 최대 600px로 제한
+    const areaX = (canvas.width - areaWidth) / 2; // 중앙 정렬
+    const areaY = (canvas.height - areaHeight) / 2;
 
     const jellyArray = [];
     const numJellies = 4;
@@ -49,11 +56,17 @@ function JellyAnimation2() {
         this.x += this.dx;
         this.y += this.dy;
 
-        // 벽에 부딪히면 방향 반전
-        if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+        // 제한된 공간 내에서 충돌 처리
+        if (
+          this.x + this.radius > areaX + areaWidth ||
+          this.x - this.radius < areaX
+        ) {
           this.dx = -this.dx;
         }
-        if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+        if (
+          this.y + this.radius > areaY + areaHeight ||
+          this.y - this.radius < areaY
+        ) {
           this.dy = -this.dy;
         }
 
@@ -62,14 +75,14 @@ function JellyAnimation2() {
     }
 
     // 젤리 초기화
-    const colors = ["green", "yellow", "red", "blue"]; // 초록, 노랑, 분홍, 파랑
+    const colors = ["green", "orange", "red", "blue"]; // 초록, 노랑, 분홍, 파랑
     const texts = ["젤", "리", "아", "이"];
     for (let i = 0; i < numJellies; i++) {
       const radius = random(30, 50);
-      const x = random(radius, canvas.width - radius);
-      const y = random(radius, canvas.height - radius);
+      const x = random(areaX + radius, areaX + areaWidth - radius);
+      const y = random(areaY + radius, areaY + areaHeight - radius);
       const color = colors[i];
-      const text = texts[i]; // 각 젤리에 표시할 텍스트
+      const text = texts[i];
 
       jellyArray.push(new Jelly(x, y, radius, color, text));
     }
@@ -77,6 +90,12 @@ function JellyAnimation2() {
     // 애니메이션 루프
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 제한된 공간 그리기
+      ctx.strokeStyle = "black";
+      ctx.strokeRect(areaX, areaY, areaWidth, areaHeight);
+
+      // 젤리 업데이트
       jellyArray.forEach((jelly) => jelly.update());
       requestAnimationFrame(animate);
     };
