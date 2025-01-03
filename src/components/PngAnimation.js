@@ -24,55 +24,47 @@ function JellyAnimation4() {
     // 랜덤 숫자 생성 함수
     const random = (min, max) => Math.random() * (max - min) + min;
 
-    // 젤리(아메바) 객체 생성
+    // 젤리(GIF) 객체 생성
     class Jelly {
-      constructor(x, y, radius, color, text, longtext) {
+      constructor(x, y, size, src, text, longtext) {
         this.x = x;
         this.y = y;
-        this.radius = radius;
-        this.color = color;
-        this.text = text; // 젤리 위에 표시할 텍스트
+        this.size = size; // GIF 크기
+        this.src = src; // GIF 경로
+        this.text = text;
+        this.longtext = longtext;
         this.dx = random(-2, 2); // X 방향 속도
         this.dy = random(-2, 2); // Y 방향 속도
-        this.angle = random(0, Math.PI * 2); // 초기 각도
-        this.offsets = Array.from({ length: 10 }, () => random(-10, 10)); // 구불구불 변형
-        this.longtext = longtext;
+        this.angle = random(0, Math.PI * 2); // 구불구불 움직임 각도
+
+        // 이미지 로드
+        this.image = new Image();
+        this.image.src = this.src;
       }
 
       draw() {
         ctx.save();
         ctx.translate(this.x, this.y);
 
-        // 아메바 모양 생성
-        ctx.beginPath();
-        for (let i = 0; i <= Math.PI * 2; i += Math.PI / 10) {
-          const index = Math.floor(i / (Math.PI / 10)); // 각도별 점의 인덱스
-          const offset = this.offsets[index] + Math.sin(this.angle + i) * 10;
-          const x = Math.cos(i) * (this.radius + offset);
-          const y = Math.sin(i) * (this.radius + offset);
-          if (i === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-        ctx.closePath();
+        // 구불구불 움직이는 효과
+        const waveX = Math.sin(this.angle) * 10;
+        const waveY = Math.cos(this.angle) * 10;
 
-        // 색상 채우기
-        ctx.fillStyle = this.color;
-        ctx.fill();
-
-        // 아메바 테두리
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        // GIF 이미지 그리기
+        ctx.drawImage(
+          this.image,
+          waveX - this.size / 2,
+          waveY - this.size / 2,
+          this.size,
+          this.size
+        );
 
         // 텍스트 그리기
         ctx.fillStyle = "black";
-        ctx.font = `${this.radius / 3}px Arial`;
+        ctx.font = `${this.size / 5}px Arial`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(this.text, 0, 0);
+        ctx.fillText(this.text, waveX, waveY);
 
         ctx.restore();
       }
@@ -80,19 +72,13 @@ function JellyAnimation4() {
       update() {
         this.x += this.dx;
         this.y += this.dy;
-        this.angle += 0.05; // 각도 변화로 아메바 애니메이션 생성
+        this.angle += 0.05; // 각도 변화로 구불구불 애니메이션 생성
 
         // 제한된 공간 내에서 충돌 처리
-        if (
-          this.x + this.radius > areaX + areaWidth ||
-          this.x - this.radius < areaX
-        ) {
+        if (this.x + this.size > areaX + areaWidth || this.x < areaX) {
           this.dx = -this.dx;
         }
-        if (
-          this.y + this.radius > areaY + areaHeight ||
-          this.y - this.radius < areaY
-        ) {
+        if (this.y + this.size > areaY + areaHeight || this.y < areaY) {
           this.dy = -this.dy;
         }
 
@@ -101,12 +87,17 @@ function JellyAnimation4() {
 
       isClicked(mouseX, mouseY) {
         const dist = Math.sqrt((mouseX - this.x) ** 2 + (mouseY - this.y) ** 2);
-        return dist <= this.radius;
+        return dist <= this.size / 2;
       }
     }
 
-    // 젤리(아메바) 초기화
-    const colors = ["green", "orange", "red", "blue"];
+    // 젤리(GIF) 초기화
+    const gifPaths = [
+      "/image/젤리아이_상단_젤.png",
+      "/image/젤리아이_상단_리.png",
+      "/image/젤리아이_상단_아.png",
+      "/image/젤리아이_상단_이.png",
+    ];
     const texts = ["젤", "리", "아", "이"];
     const longtexts = [
       "검색포털",
@@ -115,13 +106,13 @@ function JellyAnimation4() {
       "글로벌 AI 허브, AI 포털 서비스",
     ];
     for (let i = 0; i < numJellies; i++) {
-      const radius = random(50, 80);
-      const x = random(areaX + radius, areaX + areaWidth - radius);
-      const y = random(areaY + radius, areaY + areaHeight - radius);
-      const color = colors[i];
+      const size = random(80, 120);
+      const x = random(areaX + size, areaX + areaWidth - size);
+      const y = random(areaY + size, areaY + areaHeight - size);
+      const src = gifPaths[i];
       const text = texts[i];
       const longtext = longtexts[i];
-      jellyArray.push(new Jelly(x, y, radius, color, text, longtext));
+      jellyArray.push(new Jelly(x, y, size, src, text, longtext));
     }
 
     // 애니메이션 루프
@@ -133,15 +124,15 @@ function JellyAnimation4() {
         ctx.strokeStyle = "black";
         ctx.strokeRect(areaX, areaY, areaWidth, areaHeight);
 
-        // 젤리(아메바) 업데이트
+        // 젤리(GIF) 업데이트
         jellyArray.forEach((jelly) => jelly.update());
       } else {
         // 선택된 젤리의 색으로 제한된 공간 채우기
-        ctx.fillStyle = selectedJelly.color;
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
         ctx.fillRect(areaX, areaY, areaWidth, areaHeight);
 
         // 중앙 텍스트 표시
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.font = "50px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";

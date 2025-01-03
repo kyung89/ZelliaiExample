@@ -1,9 +1,9 @@
-import JellyAnimation3 from "./components/JellyAnimation3";
+import PngAnimation from "./components/PngAnimation";
 
 export default function App() {
   return (
     <div>
-      <JellyAnimation3 />
+      <PngAnimation />
     </div>
   );
 }
