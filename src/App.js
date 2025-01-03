@@ -1,9 +1,9 @@
-import PngAnimation from "./components/PngAnimation";
+import MultipleImageAnimation from "./components/MultipleImageAnimation";
 
 export default function App() {
   return (
     <div>
-      <PngAnimation />
+      <MultipleImageAnimation />
     </div>
   );
 }
