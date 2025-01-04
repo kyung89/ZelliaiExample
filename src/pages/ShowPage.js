@@ -7,7 +7,7 @@ export default function ShowPage() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000); // 3초 후에 실행
+    }, 1500); // 3초 후에 실행
   }, []);
 
   return (
