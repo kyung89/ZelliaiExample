@@ -64,7 +64,7 @@ function JellyAnimationPng() {
         style={{
           //border: "1px solid black",
           display: "block", // 캔버스를 블록 요소로 설정
-          margin: "50px auto", // 화면 중앙 정렬
+          margin: "auto", // 화면 중앙 정렬
         }}
       />
     </>
