@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import JellyAnimationBasic from "./animations/JellyAnimationBasic";
 import JellyAnimationTemp from "./animations/JellyAnimationTemp";
 import JellyAnimationPng from "./animations/JellyAnimationPng";
+import "./App.css";
 
 const Home = lazy(() => import("./pages/Home"));
 const ShowPage = lazy(() => import("./pages/ShowPage"));
