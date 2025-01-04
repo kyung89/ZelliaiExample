@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 function JellyAnimationBasic() {
   const canvasRef = useRef(null);
   const [selectedJelly, setSelectedJelly] = useState(null);
-  const [showText, setShowText] = useState(false);
+  //const [showText, setShowText] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -141,12 +141,12 @@ function JellyAnimationBasic() {
       for (const jelly of jellyArray) {
         if (jelly.isClicked(mouseX, mouseY)) {
           setSelectedJelly(jelly);
-          setShowText(true);
+          //setShowText(true);
 
           // 2초 후 상태 초기화
           setTimeout(() => {
             setSelectedJelly(null);
-            setShowText(false);
+            //setShowText(false);
           }, 2000);
           break;
         }
