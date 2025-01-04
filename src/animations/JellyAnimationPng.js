@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function JellyAnimationPng() {
   const canvasRef = useRef(null);
+  const [selectedJelly, setSelectedJelly] = useState(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
