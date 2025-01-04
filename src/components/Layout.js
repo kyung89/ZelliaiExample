@@ -21,6 +21,9 @@ function Layout() {
             <li>
               <Link to="/ja_png">JellyAnimationPng</Link>
             </li>
+            <li>
+              <Link to="/show">보여주기용 페이지</Link>
+            </li>
           </ul>
         </aside>
 
