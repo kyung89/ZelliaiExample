@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function JellyAnimation3() {
+function JellyAnimationBasic() {
   const canvasRef = useRef(null);
   const [selectedJelly, setSelectedJelly] = useState(null);
   const [showText, setShowText] = useState(false);
@@ -10,12 +10,12 @@ function JellyAnimation3() {
     const ctx = canvas.getContext("2d");
 
     // 캔버스 크기 설정
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = 800; //window.innerWidth;
+    canvas.height = 500; //window.innerHeight;
 
     // 제한된 공간 정의
     const areaWidth = 800; // 제한된 공간 너비
-    const areaHeight = 600; // 제한된 공간 높이
+    const areaHeight = 400; // 제한된 공간 높이
     const areaX = (canvas.width - areaWidth) / 2; // 중앙 정렬
     const areaY = (canvas.height - areaHeight) / 2;
 
@@ -160,7 +160,15 @@ function JellyAnimation3() {
     };
   }, [selectedJelly]);
 
-  return <canvas ref={canvasRef} style={{ display: "block" }} />;
+  return (
+    <>
+      <div>
+        기본적인 젤리아이 애니메이션입니다. 공 형태이며, 공을 누르면 배너가
+        뜹니다.
+      </div>
+      <canvas ref={canvasRef} style={{ display: "block" }} />
+    </>
+  );
 }
 
-export default JellyAnimation3;
+export default JellyAnimationBasic;

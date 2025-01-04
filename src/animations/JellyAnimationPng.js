@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-function MultipleImageAnimation() {
+function JellyAnimationPng() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ function MultipleImageAnimation() {
 
     // 캔버스 크기 설정 (지정된 크기)
     canvas.width = 800; // 캔버스 너비
-    canvas.height = 600; // 캔버스 높이
+    canvas.height = 400; // 캔버스 높이
 
     // 이미지 배열과 속성 설정
     const images = [
@@ -57,15 +57,20 @@ function MultipleImageAnimation() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        border: "1px solid black",
-        display: "block", // 캔버스를 블록 요소로 설정
-        margin: "50px auto", // 화면 중앙 정렬
-      }}
-    />
+    <>
+      <div className="mb-12">
+        젤리 모양의 png 파일을 사용한 애니메이션입니다.{" "}
+      </div>
+      <canvas
+        ref={canvasRef}
+        style={{
+          border: "1px solid black",
+          display: "block", // 캔버스를 블록 요소로 설정
+          //margin: "50px auto", // 화면 중앙 정렬
+        }}
+      />
+    </>
   );
 }
 
-export default MultipleImageAnimation;
+export default JellyAnimationPng;
