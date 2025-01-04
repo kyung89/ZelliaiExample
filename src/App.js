@@ -12,7 +12,13 @@ const ShowPage = lazy(() => import("./pages/ShowPage"));
 function App() {
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center mt-80">
+            <div className="spinner"></div>
+          </div>
+        }
+      >
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
