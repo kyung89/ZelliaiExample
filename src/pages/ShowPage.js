@@ -19,13 +19,21 @@ export default function ShowPage() {
       ) : (
         <div>
           <div>
-            <img className="w-fit mx-auto" src="/image/헤더.png" alt="header" />
+            <img
+              className="w-fit mx-auto"
+              src="/image/헤더2.png"
+              alt="header"
+            />
           </div>
           <div>
             <JellyAnimationPng2 />
           </div>
           <div>
-            <img className="w-fit mx-auto" src="/image/아래.png" alt="header" />
+            <img
+              className="w-fit mx-auto"
+              src="/image/아래2.png"
+              alt="header"
+            />
           </div>
         </div>
       )}
