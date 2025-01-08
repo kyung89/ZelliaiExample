@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import JellyAnimationBasic from "./animations/JellyAnimationBasic";
 import JellyAnimationPng from "./animations/JellyAnimationPng";
 import JellyAnimationTemp from "./animations/JellyAnimationTemp";
+import OrganicBallAnimation from "./animations/OrganicBallAnimation";
 import OrganicJellyAnimation from "./animations/OrganicJellyAnimation";
 import "./App.css";
 import Layout from "./components/Layout";
@@ -27,6 +28,7 @@ function App() {
             <Route path="ja_temp" element={<JellyAnimationTemp />} />
             <Route path="ja_png" element={<JellyAnimationPng />} />
             <Route path="oja" element={<OrganicJellyAnimation />} />
+            <Route path="oba" element={<OrganicBallAnimation />} />
           </Route>
           <Route path="/show" element={<ShowPage />} />
         </Routes>

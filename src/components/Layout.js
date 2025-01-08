@@ -25,6 +25,9 @@ function Layout() {
               <Link to="oja">OrganicJellyAnimation</Link>
             </li>
             <li>
+              <Link to="oba">OrganicBallAnimation</Link>
+            </li>
+            <li>
               <Link to="/show">보여주기용 페이지</Link>
             </li>
           </ul>
