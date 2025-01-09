@@ -21,8 +21,8 @@ function OrganicJellyAnimation() {
 
     // 초기 고정 위치
     const fixedPositions = [
-      { x: 200, y: 150 },
-      { x: 400, y: 150 },
+      { x: 100, y: 150 },
+      { x: 400, y: 100 },
       { x: 200, y: 250 },
       { x: 500, y: 250 },
     ];
@@ -38,8 +38,8 @@ function OrganicJellyAnimation() {
         this.radius = radius;
         this.color = color;
         this.text = text;
-        this.dx = random(-1, 1.5);
-        this.dy = random(-1, 1.5);
+        this.dx = random(-1, 2);
+        this.dy = random(-1, 2);
         this.offsets = Array.from({ length: 50 }, () => random(-10, 10)); // 유기체 파형 오프셋
         this.angle = random(0, Math.PI * 2);
         this.angleSpeed = random(0.001, 0.005);
@@ -92,6 +92,10 @@ function OrganicJellyAnimation() {
         if (this.isMerging) {
           // 융합 진행 중
           this.mergeProgress += 0.05;
+
+          // 융합 중에도 벽 충돌 감지
+          this.handleWallCollision();
+
           if (this.mergeProgress >= 1) {
             this.isMerging = false;
             this.mergeProgress = 0;
@@ -101,21 +105,33 @@ function OrganicJellyAnimation() {
           this.x += this.dx;
           this.y += this.dy;
 
-          // 벽 충돌 처리 (화면 영역 경계)
-          if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) {
-            this.dx *= -1; // X 방향 반전
-          }
-          if (
-            this.y - this.radius < 0 ||
-            this.y + this.radius > canvas.height
-          ) {
-            this.dy *= -1; // Y 방향 반전
-          }
+          // 제한된 영역 충돌 처리
+          this.handleWallCollision();
         }
 
         // 유기체 각도 업데이트
         this.angle += this.angleSpeed;
         this.draw();
+      }
+
+      handleWallCollision() {
+        // 벽 충돌 처리: 제한 영역 밖으로 나가지 않도록 보장
+        if (this.x - this.radius < areaX) {
+          this.x = areaX + this.radius; // 위치 조정
+          this.dx *= -1; // 속도 반전
+        }
+        if (this.x + this.radius > areaX + areaWidth) {
+          this.x = areaX + areaWidth - this.radius;
+          this.dx *= -1;
+        }
+        if (this.y - this.radius < areaY) {
+          this.y = areaY + this.radius;
+          this.dy *= -1;
+        }
+        if (this.y + this.radius > areaY + areaHeight) {
+          this.y = areaY + areaHeight - this.radius;
+          this.dy *= -1;
+        }
       }
     }
 
